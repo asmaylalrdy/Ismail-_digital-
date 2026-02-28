@@ -1,3 +1,4 @@
+require('dotenv').config(); // قراءة المتغيرات من .env
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
@@ -37,9 +38,10 @@ app.post("/chat", async (req, res) => {
     res.json({ reply: data.choices[0].message.content });
 
   } catch (error) {
+    console.error(error);
     res.status(500).json({ reply: "حصل خطأ يا إسماعيل." });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running..."));
+app.listen(PORT, () => console.log("Server running on port " + PORT));
